@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) OR exit;
 
 //This API key is used to explore the styles in snazzy maps
 define('API_BASE', 'https://snazzymaps.com/');
-define('API_KEY', 'ecaccc3c-44fa-486c-9503-5d473587a493');
+define('API_KEY', '2cbc9361-d759-4ecc-b48c-3efc7fdf3ae4');
 define('VERSION', '1.0.0');
 
 if(!defined('_DS')) {
@@ -51,7 +51,7 @@ add_action('init', 'init_plugin');
 
 //Pass the style information into the javascript file on the main page
 function enqueue_script() {
-    $uniqueStyle = get_option('SnazzyMapDefaultStyle');
+    $uniqueStyle = get_option('Maps');
     if(!empty($uniqueStyle) && !is_null($uniqueStyle)){
         $handle = 'snazzymaps-js';
         wp_enqueue_script($handle, 

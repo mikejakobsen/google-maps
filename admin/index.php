@@ -35,7 +35,7 @@ function admin_enqueue_script($hook){
                                                   'API_BASE' => API_BASE,
                                                   'USER_API_KEY' => get_option('MySnazzyAPIKey', null)));
     
-    //Include the bower components
+    //Include the vendor stuff
     $bower_components = array(
         //history js
         'history.js' . _DS . 'scripts' . 
@@ -95,7 +95,7 @@ function admin_add_custom_content(){
                     ?>
                 </h2>         
                 <?php if($active_tab == 0) { admin_styles_tab(0); } ?>     
-                <?php if($active_tab == 1) { admin_explore_tab(1); } ?>
+                <?php if( is_admin() && $active_tab == 1) { admin_explore_tab(1); } ?>
             </div>                
         </div>    
     </div>

@@ -45,19 +45,13 @@ defined( 'ABSPATH' ) OR exit;
         }
                 
                 
-        //Delete the specified style from the array
         if(isset($_GET['action']) && $_GET['action'] == 'delete_style'){
             $index = _getStyleIndex($styles, $_GET['style']);
-            $defaultStyle = get_option('SnazzyMapDefaultStyle', null);  
+            $defaultStyle = get_option('Maps', null);  
             if(!is_null($index)){                
                 $oldStyle = $styles[$index];
                 array_splice($styles, $index, 1);    
                 update_option('SnazzyMapStyles', $styles);     
-                
-                //Delete the default style when it is removed from this list
-                if(!is_null($defaultStyle) && $defaultStyle['id'] == $oldStyle['id']){
-                    delete_option('SnazzyMapDefaultStyle');
-                }
             }
         }
         
@@ -65,22 +59,22 @@ defined( 'ABSPATH' ) OR exit;
         if(isset($_GET['action']) && $_GET['action'] == 'enable_style'){
             $index = _getStyleIndex($styles, $_GET['style']);
             if(!is_null($index)){
-                update_option('SnazzyMapDefaultStyle', $styles[$index]);
+                update_option('Maps', $styles[$index]);
             }        
         }
         
         //Disable the specified style        
         if(isset($_GET['action']) && $_GET['action'] == 'disable_style'){
             $index = _getStyleIndex($styles, $_GET['style']);
-            $defaultStyle = get_option('SnazzyMapDefaultStyle', null);    
+            $defaultStyle = get_option('Maps', null);    
             if(!is_null($index) && !is_null($defaultStyle) 
                 && $styles[$index]['id'] == $defaultStyle['id']){
-                delete_option('SnazzyMapDefaultStyle');
+                delete_option('Maps');
             }        
         }
         
         
-        $defaultStyle = get_option('SnazzyMapDefaultStyle', null);
+        $defaultStyle = get_option('Maps', null);
         
         //Used during testing
         if(isset($_GET['clear_styles'])){
@@ -122,8 +116,6 @@ defined( 'ABSPATH' ) OR exit;
                                         class="button button-primary button-large">Aktiver</a>
                                 <?php 
                                 } ?>
-                                <a href="<?php echo _styleAction($style, 'delete_style'); ?>" 
-                                    class="delete button button-error button-large">Fjern</a>
                             </div>
                         </div>
                     </div>     
